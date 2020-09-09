@@ -32,6 +32,7 @@ The observed numbers of events in each bin are also included. The last bin inclu
     # First variable/column ---> MET
     met = Variable("MET", is_independent=True, is_binned=True, units="GeV")
     met.values = [item[0] for item in data]
+    print [item[0] for item in data]
 
     # Second variable/column ---> Number of observed events
     obs = Variable("Data", is_independent=False,
@@ -55,7 +56,7 @@ The observed numbers of events in each bin are also included. The last bin inclu
     unc_cr = Uncertainty("total")
     unc_cr.values = [item[3][1] for item in data]
     exp_cr.uncertainties.append(unc_cr)
-
+    print obs
     table.add_variable(met)
     table.add_variable(obs)
     table.add_variable(exp_full)
@@ -71,6 +72,7 @@ def main():
     # Write some files
     submission = Submission()
     submission.tables.append(make_table_4(outdir))
+    #submission.figures.append("input/brazilianFlag_BulkZZ_VVnew_new_combined_13TeV.pdf")
     submission.read_abstract("./input/abstract.txt")
     submission.create_files(outdir)
 
